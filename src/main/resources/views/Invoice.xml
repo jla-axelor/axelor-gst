@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+  	<form id="gst-invoice-form" name="invoice-form" title="Invoice" model="com.axelor.apps.account.db.Invoice" extension="true">
+		<extend target="panel[@name='totalsCompanyCurrencyPanel']">
+			<insert position="after">
+				<panel name="invoiceGstPanel" title="GST" sidebar="true">
+					<field name="netAmmount"/>
+					<field name="netIgst"/>
+					<field name="netCsgt"/>
+					<field name="netSgst"/>
+					<field name="grossAmount"/>
+				</panel>
+			</insert>
+		</extend>  	
+		<extend target="field[@name='partner']">
+			<attribute name="onChange" value="action-group-gst-onchange-partner"/>
+		</extend>
+  	</form>
+  	
+  	<action-group name="action-group-gst-onchange-partner">
+  		<action name="action-group-account-invoice-partner-onchange"/>
+  		<action name="action-method-invoice-address-str"/>
+  		<action name="action-method-set-invoie-line-onchange-partner"/>
+  	</action-group>
+  	
+  	<action-method name="action-method-set-invoie-line-onchange-partner" model="com.axelor.apps.account.db.Invoice">
+  		<call class="com.axelor.apps.gst.web.InvoiceController" method="setInvoiceItemsValues"/>
+  	</action-method>
+	
+</object-views>

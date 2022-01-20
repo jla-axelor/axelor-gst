@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+	
+	<menuitem title="GST" name="gst-root" if="__config__.app.isApp('gst')"/> 
+	
+	<menuitem title="Partners" name="gst-root-partner-details" parent="gst-root"/>
+	
+	<menuitem title="Partners" name="gst-root-partner" parent="gst-root-partner-details" action="action-gst-partner-display"/>
+	<action-view name="action-gst-partner-display" title="Partner" model="com.axelor.apps.base.db.Partner">
+		<view type="grid"/>
+		<view type="form" name="partner-gst-form"/>
+	</action-view>
+	
+	<menuitem title="Contacts" name="gst-root-contacts" parent="gst-root-partner-details" action="action-gst-partner-contacts-display"/>
+	<action-view name="action-gst-partner-contacts-display" title="Contacts" model="com.axelor.apps.base.db.Partner">
+		<view type="grid" name="partner-contact-grid"/>
+		<view type="form" name="partner-contact-form"/>
+	</action-view>
+	
+	<menuitem title="Product" name="gst-root-product" parent="gst-root"/>
+	
+	<menuitem title="Products" name="gst-root-product-products" parent="gst-root-product" action="action-gst-root-product-products"/>
+	<action-view name="action-gst-root-product-products" title="Products" model="com.axelor.apps.base.db.Product">
+		<view type="grid"/>
+		<view type="form"/>
+	</action-view>
+	
+	<menuitem title="Product Category" name="gst-root-product-product-category" parent="gst-root-product" action="action-gst-product-product-category"/>
+	<action-view name="action-gst-product-product-category" title="Product category" model="com.axelor.apps.base.db.ProductCategory">
+		<view type="grid"/>
+		<view type="form"/>
+	</action-view>
+	
+	<menuitem title="Invoice" name="gst-root-inoive" parent="gst-root" action="action-gst-root-invoice"/>
+	<action-view name="action-gst-root-invoice" title="Invoice" model="com.axelor.apps.account.db.Invoice">
+		<view type="grid" name="invoice-grid"/>
+		<view type="form" name="invoice-form"/>
+	</action-view>
+
+	
+</object-views>

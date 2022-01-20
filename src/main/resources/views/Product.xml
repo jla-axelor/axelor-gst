@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+  
+	<form id="gst-product-form" name="product-form" title="Product" model="com.axelor.apps.base.db.Product" extension="true">
+		<extend target="//field[@name='productCategory']">
+			<insert position="after">
+					<field name="gstRate" />
+					<field name="hsbn"/>
+			</insert>
+		</extend>
+		<extend target="//field[@name='productCategory']">
+			<attribute name="onChange" value="action-record-fill-gst-rate-onchange-category"/>
+		</extend>
+	</form>
+
+	<action-record name="action-record-fill-gst-rate-onchange-category" model="com.axelor.apps.base.db.Product">
+		<field name="gstRate" expr="eval: productCategory.gstRate"/>
+	</action-record>
+</object-views>

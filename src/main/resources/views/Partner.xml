@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+	
+	<form id="partner-gst-form" name="partner-form" title="Partner" model="com.axelor.apps.base.db.Partner" extension="true">
+		<extend target="//field[@name='department']">
+			<insert position="after">
+				<field name="gstin" colSpan="12"/>
+			</insert>
+		</extend>
+	</form>
+	
+</object-views>
