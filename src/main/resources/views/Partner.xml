@@ -6,7 +6,7 @@
 	<form id="partner-gst-form" name="partner-form" title="Partner" model="com.axelor.apps.base.db.Partner" extension="true">
 		<extend target="//field[@name='department']">
 			<insert position="after">
-				<field name="gstin" colSpan="12"/>
+				<field name="gstin" colSpan="12" if="__config__.app.isApp('gst')"/>
 			</insert>
 		</extend>
 	</form>

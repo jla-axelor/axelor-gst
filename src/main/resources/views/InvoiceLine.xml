@@ -7,8 +7,8 @@
     model="com.axelor.apps.account.db.InvoiceLine" width="large" extension="true">
         <extend target="panel-tabs[@name='mainPanelTab']/*[1]">
         	<insert position="after">
-        		<panel name="gstPanle" title="Gst">
-        			<field name="hsbn"/>
+        		<panel name="gstPanle" title="Gst" if="__config__.app.isApp('gst')">
+        			<field name="hsbn" title="HSBN" readonly="true"/>
         			<field name="gstRate"/>
         			<field name="IGST" title="IGST"/>
         			<field name="SGST" title="SGST"/>
@@ -17,17 +17,17 @@
         		</panel>
         	</insert>
         </extend>
+
         <extend target="//field[@name='product']">
         	<attribute name="onChange" value="action-group-invoie-line-gst-product-onchange"/>
-        	
         </extend>
         
   </form>
 	
 	<action-group name="action-group-invoie-line-gst-product-onchange">
 		<action name="action-group-account-invoice-line-product-onchange"/>
-		<action name="action-record-gst-fill-gst-rate"/>
-		<action name="action-method-set-get-invoice-line-amounts"/>
+		<action name="action-record-gst-fill-gst-rate" if="__config__.app.isApp('gst')"/>
+		<action name="action-method-set-get-invoice-line-amounts" if="__config__.app.isApp('gst')"/>
 	</action-group>
 	
 	<action-record name="action-record-gst-fill-gst-rate" model="com.axelor.apps.account.db.InvoiceLine">

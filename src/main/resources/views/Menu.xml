@@ -33,11 +33,11 @@
 		<view type="form"/>
 	</action-view>
 	
-	<menuitem title="Invoice" name="gst-root-inoive" parent="gst-root" action="action-gst-root-invoice"/>
-	<action-view name="action-gst-root-invoice" title="Invoice" model="com.axelor.apps.account.db.Invoice">
-		<view type="grid" name="invoice-grid"/>
-		<view type="form" name="invoice-form"/>
-	</action-view>
+	<menuitem title="Invoices" name="gst-root-inoivce" parent="gst-root"/>
+	<menuitem title="Cust. Invoices" name="gst-root-customer-invoice" parent="gst-root-inoivce" action="invoice.root.custinvoices"/>
+	<menuitem name="gst-root-custrefunds" parent="gst-root-inoivce" title="Cust. Refunds" action="invoice.root.custrefunds"/>
+	<menuitem name="gst-root-purchase-supinvoices" parent="gst-root-inoivce" title="Suppl. Invoices" action="invoice.root.purchase.supinvoices"/>
+	<menuitem name="gst-root-purchase-suprefunds" parent="gst-root-inoivce" title="Suppl. Refunds" action="invoice.root.purchase.suprefunds"/>
 
 	
 </object-views>

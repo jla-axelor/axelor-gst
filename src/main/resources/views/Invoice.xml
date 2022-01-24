@@ -6,7 +6,7 @@
   	<form id="gst-invoice-form" name="invoice-form" title="Invoice" model="com.axelor.apps.account.db.Invoice" extension="true">
 		<extend target="panel[@name='totalsCompanyCurrencyPanel']">
 			<insert position="after">
-				<panel name="invoiceGstPanel" title="GST" sidebar="true">
+				<panel name="invoiceGstPanel" title="GST" sidebar="true" if="__config__.app.isApp('gst')">
 					<field name="netAmmount"/>
 					<field name="netIgst"/>
 					<field name="netCsgt"/>
@@ -15,19 +15,46 @@
 				</panel>
 			</insert>
 		</extend>  	
-		<extend target="field[@name='partner']">
+		
+		<extend target="//field[@name='partner']">
 			<attribute name="onChange" value="action-group-gst-onchange-partner"/>
 		</extend>
+		
+		<extend target="//panel-related[@name='invoiceLineListPanel']">
+			<attribute name="onChange" value="action-group-gst-invoice-line-onchange"/>
+		</extend>
+		
+		<extend target="/">
+			<attribute name="onNew" value="action-group-gst-invoice-onnew"/>
+		</extend>
   	</form>
+  	<action-group name="action-group-gst-invoice-line-onchange" model="com.axelor.apps.account.db.Invoice">
+  		<action name="action-method-gst-set-invoice-amounts" if="__config__.app.isApp('gst')"/>
+  		<action name="action-invoice-group-invoice-line-list-on-change"/>
+  		<action name="save"/>
+  	</action-group>
   	
-  	<action-group name="action-group-gst-onchange-partner">
+  	<action-group name="action-group-gst-onchange-partner" model="com.axelor.apps.account.db.Invoice">
   		<action name="action-group-account-invoice-partner-onchange"/>
   		<action name="action-method-invoice-address-str"/>
-  		<action name="action-method-set-invoie-line-onchange-partner"/>
+  		<action name="action-method-set-invoie-line-onchange-partner" if="__config__.app.isApp('gst')"/>
+  	</action-group>
+  	
+  	<action-group name="action-group-gst-invoice-onnew" model="com.axelor.apps.account.db.Invoice">
+  		<action name="action-account-invoice-onnew-group"/>
+  		<action name="action-method-gst-create-invoice-set-invoice-line" if="'_productIds' != null &amp;&amp;__config__.app.isApp('gst')"/>
   	</action-group>
   	
   	<action-method name="action-method-set-invoie-line-onchange-partner" model="com.axelor.apps.account.db.Invoice">
   		<call class="com.axelor.apps.gst.web.InvoiceController" method="setInvoiceItemsValues"/>
   	</action-method>
+	
+	<action-method name="action-method-gst-set-invoice-amounts" model="com.axelor.apps.account.db.Invoice">
+		<call class="com.axelor.apps.gst.web.InvoiceController" method="setInvoiceNetAmounts"/>
+	</action-method>
+	
+	<action-method name="action-method-gst-create-invoice-set-invoice-line" model="com.axelor.apps.account.db.Invoice">
+		<call class="com.axelor.apps.gst.web.InvoiceController" method="setSelectedProduct"/>
+	</action-method>
 	
 </object-views>

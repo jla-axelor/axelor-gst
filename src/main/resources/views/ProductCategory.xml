@@ -6,7 +6,7 @@
 	<form id="gst-product-category-form" name="product-category-form" title="Product category" model="com.axelor.apps.base.db.ProductCategory" width="large" extension="true">
     	<extend target="//field[@name='maxDiscount']">
     		<insert position="after">
-    			<field name="gstRate"/>
+    			<field name="gstRate" if="__config__.app.isApp('gst')"/>
     		</insert>
     	</extend>
     </form>  

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.axelor.apps.account.db.InvoiceLine;
+import com.google.inject.persist.Transactional;
 
 public class InvoiceLineServiceImpl implements InvoiceLineService {
 
@@ -34,6 +35,7 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 	}
 	
 	@Override
+	@Transactional
 	public void setAmountOnchagePartner(List<InvoiceLine> lines, String invoiceAddressStateName,
 			String companyAddressStateName) {
 			
@@ -68,6 +70,7 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 				line.setGrossAmount(grossAmount);
 				line.setIGST(new BigDecimal(0));
 			}
+			
 		}
 		
 	}

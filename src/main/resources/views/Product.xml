@@ -3,6 +3,17 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
   
+	 <grid id="gst-product-grid" name="product-grid" title="Products" model="com.axelor.apps.base.db.Product" extension="true">
+			<extend target="//button[@name='checkDuplicateBtn']">
+				<insert position="after">
+					<button title="Create invoice" onClick="" name="createInvoiceBtn" if="__config__.app.isApp('gst')"/>
+				</insert>
+			</extend>
+			<extend target="//button[@name='createInvoiceBtn']">
+				<attribute name="onClick" value="action-group-gst-create-invoice"/>
+			</extend>
+	</grid>
+	
 	<form id="gst-product-form" name="product-form" title="Product" model="com.axelor.apps.base.db.Product" extension="true">
 		<extend target="//field[@name='productCategory']">
 			<insert position="after">
@@ -14,8 +25,23 @@
 			<attribute name="onChange" value="action-record-fill-gst-rate-onchange-category"/>
 		</extend>
 	</form>
-
+	
+	<action-group name="action-group-gst-create-invoice">
+		<action name="action-validate-gst-selected-product"/>
+		<action name="action-view-gst-product-create-invoice" if="_ids != null"/>
+	</action-group>
+	
 	<action-record name="action-record-fill-gst-rate-onchange-category" model="com.axelor.apps.base.db.Product">
 		<field name="gstRate" expr="eval: productCategory.gstRate"/>
 	</action-record>
+	
+	<action-validate name="action-validate-gst-selected-product" model="com.axelor.apps.base.db.Product" >
+		<error message="Please select product" if="_ids == null"/>
+	</action-validate>
+	
+	<action-view name="action-view-gst-product-create-invoice" title="Invoice" model="com.axelor.apps.account.db.Invoice" >
+		<view type="form" name="invoice-form" />
+		<context name="_productIds" expr="eval: _ids" if="_ids != null" />
+	</action-view>
+	
 </object-views>
