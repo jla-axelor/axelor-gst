@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+	
+	<form id="gst-sale-order-line-form" name="sale-order-line-form" title="SO line" model="com.axelor.apps.sale.db.SaleOrderLine" width="large" extension="true">
+		<extend target="panel-tabs[@name='mainPanelTab']/*[1]">
+			<insert position="after">
+				<panel name="gstPanel" title="GST">
+					<field name="hsbn" title="HSBN" readonly="true"/>
+        			<field name="gstRate"/>
+        			<field name="IGST" title="IGST"/>
+        			<field name="SGST" title="SGST"/>
+        			<field name="CGST" title="CGST"/>
+        			<field name="grossAmount"/>
+				</panel>
+			</insert>
+		</extend>
+		
+    </form>
+    
+</object-views>

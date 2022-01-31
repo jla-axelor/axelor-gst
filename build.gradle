@@ -9,5 +9,10 @@ axelor {
 dependencies {
 	api project(":modules:axelor-base")
 	api project(":modules:axelor-account")
+	api project(":modules:axelor-sale")
+	api project(":modules:axelor-purchase")
+	api project(":modules:axelor-business-production")
+	api project(":modules:axelor-supplychain")
+	api project(":modules:axelor-business-project")
 }
 

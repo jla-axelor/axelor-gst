@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+
+	<form id="gst-sale-order-form" name="sale-order-form" title="Sale order"
+    model="com.axelor.apps.sale.db.SaleOrder" extension="true">
+    	<extend target="//panel[@name='inTaxTotalPanel']">
+    		<insert position="after">
+    			<panel name="gstPanel" title="GST" sidebar="true">
+    				<field name="netIgst"/>
+    				<field name="netCsgt"/>
+    				<field name="netSgst"/>
+    				<field name="grossAmount"/>
+    			</panel>
+    		</insert>
+    	</extend>
+	</form>
+
+</object-views>
